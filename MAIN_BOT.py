@@ -323,9 +323,9 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         time.sleep(3)
 
         
-    #def tearDown(self):
-     #   self.driver.close()
-     #   self.driver.quit()
+    def tearDown(self):
+        self.driver.close()
+        self.driver.quit()
         
         
 if __name__ == '__main__':
