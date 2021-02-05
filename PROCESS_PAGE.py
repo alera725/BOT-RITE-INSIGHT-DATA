@@ -25,6 +25,7 @@ class process_page():
         self.POS_REPORT_ID = (By.XPATH, '//*[@id="ext-comp-1006__ext-comp-1002"]')
         self.Item_Inventory_Rate_of_Sale = (By.XPATH, '//*[@id="microsite_ravend.pbrpos.iteminventoryrateofsale_gold"]/a')
         self.SALES_BY_ITEM_competitive = (By.XPATH, '//*[@id="microsite_ravend.pbrpos.salesbyitemcomp_gold"]/a')
+        self.Item_masterlisting_competitive = (By.XPATH, '//*[@id="microsite_ravend.pbrpos.itmmastercomp_gold"]/a')
         self.dates_filter_button = (By.ID, 'tinp_we')
         self.start_date = (By.ID, 'tdateSelInpStartDt')
         self.end_date = (By.ID, 'tdateSelInpEndDt')
@@ -88,6 +89,10 @@ class process_page():
                 #Select report  
                 Report = WebDriverWait(self.driver,60).until(EC.visibility_of_element_located(self.SALES_BY_ITEM_competitive))
                 Report.click()
+            elif numbot == 4:
+                #Select report  
+                Report = WebDriverWait(self.driver,60).until(EC.visibility_of_element_located(self.Item_masterlisting_competitive))
+                Report.click()                
             else:
                 print('Error, please select 1 or 2 for num bot')
             
@@ -194,6 +199,17 @@ class process_page():
                 pf = self.driver.find_element_by_id(self.product_filter) 
                 pf.click()
             
+                #set products dropdown filter
+                #WebDriverWait(self.driver, 50).until(EC.visibility_of_element_located(self.vendor_dropdown))
+                select_vdr = Select(self.driver.find_element_by_id(self.vendor_dropdown))
+                select_vdr.select_by_visible_text("All products in Carlin Group categories") #select_by_index(1)          
+
+            elif numbot == 4:
+                #PRODUCT FILTER 
+                product_filter = 'ttabPanel__ext-comp-1011'
+                pf = self.driver.find_element_by_id(product_filter) 
+                pf.click()
+                time.sleep(3)
                 #set products dropdown filter
                 #WebDriverWait(self.driver, 50).until(EC.visibility_of_element_located(self.vendor_dropdown))
                 select_vdr = Select(self.driver.find_element_by_id(self.vendor_dropdown))
