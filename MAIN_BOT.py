@@ -54,7 +54,7 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
             self.email = data["user"]
             self.pswd = data["pass"]
 
-    #@unittest.skip('Not need now')
+    @unittest.skip('Not need now')
     def test_INVENTORY_KIND(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
@@ -303,7 +303,7 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
     def test_INVENTORY_VIRMAX(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
-        name = 'VIRMAX RITE INSIGHT'
+        name = 'VIRMAX RITE INSIGHT '
 
         #eL BOT 1 LLEGA HASTA PRODUCT FILER Y DESPUES EL BOTON DE EXCEL 
         self.PageInitial.step_1(self.email,self.pswd)
@@ -348,7 +348,7 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         print("%s is READY!!"%name) 
         time.sleep(3)
         
-    @unittest.skip('Not need now')
+    #@unittest.skip('Not need now')
     def test_INVENTORY_EVOLVE(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
@@ -428,50 +428,29 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
             else:
                 continue        
 
-        # !!! IMPORTANTE !!! Aqui Checar el ultimo archivo cargado de ese retailer y vemos los renglones que tiene damos un rango de +- 100 o 50 FALTAAAAAA RUTA DEL RETAILER EN EL QUE ESTAMOS Y REVISAR ULTIMO ARCHIVO Y CONTAR LOS ROWS
-        previous_file_path = 'C:\\Users\\alejandro.gutierrez\\OneDrive - Carlin Group - CA Fortune\\Documents\\KROGER SELENIUM\\RITE INSIGHT\\INVENTORY'
-        try:
-            previous_file = max([previous_file_path + "\\" + f for f in os.listdir(previous_file_path)],key=os.path.getctime) #Ultimo archivo cargado en la ruta del retailer 
-            #print(previous_file)
-            previous_file_n = pd.read_excel(previous_file)#, skiprows=14)
-            n_rows_prev = len(previous_file_n.index) #Count rows 
-            #print(n_rows_prev)
-            
-            
-            #CHECAR LA ULTIMA DESCARGA (PARA CAMBIAR EL NOMBRE A LA ULTIMA DESCARGA)
-            Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin") 
-            Initial_path = self.dir_download 
-            filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-            
-            current_file = pd.read_excel(filename) #, skiprows=14)
-            n_rows_current = len(current_file.index) #Count rows 
-            
-            #Aqui despues se hace si el nuevo archivo pasa el limite se guarda con otro nombre advirtiendo que puede tener error el archivo 
-            #Sino se guarda el archivo todo normal
-            limite = n_rows_prev/3
-            
-            if(n_rows_current>n_rows_prev+limite or n_rows_current<n_rows_prev-limite):              
-                new_name = '%s'%name + str(Current_Date) + '.xlsx'
-                shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))
-            else:
-                new_name = '%s'%name + str(Current_Date) + '.xlsx'
-                shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))
-        except:
-            Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin")
-            Initial_path = self.dir_download
-            filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-            new_name = '%s'%name + str(Current_Date) + '.xlsx'
-            shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
+        # !!! IMPORTANTE !!! ENCONTRAR EL ULTIMO ARCHIVO EN LA CARPETA DE DESCARGAS Y CAMBIARLE EL NOMBRE POR EL DESEADO
+        #Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin")
+        #Week number 
+        t1 = datetime.now()
+        week_number = t1.strftime("%U")
+        
+        Initial_path = self.dir_download
+        filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
+        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
-        new_download = 'C:\\Users\\alejandro.gutierrez\\OneDrive - Carlin Group - CA Fortune\\Documents\\KROGER SELENIUM\\RITE INSIGHT\\INVENTORY'
+        new_download = self.inventory_path #'C:\\Users\\alejandro.gutierrez\\OneDrive - Carlin Group - CA Fortune\\Documents\\KROGER SELENIUM\\RITE INSIGHT\\INVENTORY'
         shutil.move('%s'%self.dir_download+'\\%s'%new_name, '%s'%new_download+'\\%s'%new_name)     
+        
+        #COPIAR ESTE INVENTORY COMO NUEVA HOJA A SU RUTA EN EL EXCEL DE LA MARCA 
         
         print("%s is READY!!"%name) 
         time.sleep(3)
         
         
-    @unittest.skip('Not need now')
+        
+    #@unittest.skip('Not need now')
     def test_SBIC_YTD_FROM_DECEMBER_2020(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
@@ -489,7 +468,7 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         self.PageProcess.metrics_filter()
         self.PageProcess.excel()
         
-        time.sleep(200)
+        time.sleep(260)
         
         #Esperar a que la descarga se complete
         after = os.listdir(self.dir_download) 
