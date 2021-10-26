@@ -53,6 +53,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
             data = json.load(json_file)
             self.email = data["user"]
             self.pswd = data["pass"]
+        
+        #!!!Cambiar de manera manual si se correra una semana pasada comentar t1 y weeknumber y descomentar weeknumber manual !!!
+        self.t1 = datetime.now()
+        self.week_number = self.t1.strftime("%U")
+        #self.week_number = '39'
+
 
     @unittest.skip('Not need now')
     def test_INVENTORY_KIND(self):
@@ -67,6 +73,7 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         self.PageProcess.Prod_filter(1, brand='KIND') #Agregar el parametro brand='KIND'
         self.PageProcess.check_non48_49()
         self.PageProcess.excel()
+        print(name)
         
         time.sleep(60)
         
@@ -85,12 +92,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         # !!! IMPORTANTE !!! ENCONTRAR EL ULTIMO ARCHIVO EN LA CARPETA DE DESCARGAS Y CAMBIARLE EL NOMBRE POR EL DESEADO
         #Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin")
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
         
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -102,11 +109,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         print("%s is READY!!"%name) 
         time.sleep(3)
         
-    @unittest.skip('Not need now')
+    #@unittest.skip('Not need now')
     def test_INVENTORY_KRAVE(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'KRAVE RITE INSIGHT '
+        print(name)
 
         #eL BOT 1 LLEGA HASTA PRODUCT FILER Y DESPUES EL BOTON DE EXCEL 
         self.PageInitial.step_1(self.email,self.pswd)
@@ -134,12 +142,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         # !!! IMPORTANTE !!! ENCONTRAR EL ULTIMO ARCHIVO EN LA CARPETA DE DESCARGAS Y CAMBIARLE EL NOMBRE POR EL DESEADO
         #Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin")
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
         
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -151,11 +159,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         print("%s is READY!!"%name) 
         time.sleep(3)
         
-    @unittest.skip('Not need now')
+   # @unittest.skip('Not need now')
     def test_INVENTORY_EOS(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'EOS RITE INSIGHT '
+        print(name)
 
         #eL BOT 1 LLEGA HASTA PRODUCT FILER Y DESPUES EL BOTON DE EXCEL 
         self.PageInitial.step_1(self.email,self.pswd)
@@ -183,12 +192,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         # !!! IMPORTANTE !!! ENCONTRAR EL ULTIMO ARCHIVO EN LA CARPETA DE DESCARGAS Y CAMBIARLE EL NOMBRE POR EL DESEADO
         #Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin")
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
         
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week '+ str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week '+ str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -200,7 +209,7 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         print("%s is READY!!"%name) 
         time.sleep(3)
         
-    @unittest.skip('Not need now')
+    #@unittest.skip('Not need now')
     def test_INVENTORY_STERNO(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
@@ -214,7 +223,8 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         self.PageProcess.Prod_filter(1, brand='STERNO') #Agregar el parametro brand='KIND'
         self.PageProcess.check_non48_49()
         self.PageProcess.excel()
-        
+        print(name)
+      
         time.sleep(60)
         
         #Esperar a que la descarga se complete
@@ -232,12 +242,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         # !!! IMPORTANTE !!! ENCONTRAR EL ULTIMO ARCHIVO EN LA CARPETA DE DESCARGAS Y CAMBIARLE EL NOMBRE POR EL DESEADO
         #Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin")
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
         
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -249,11 +259,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         print("%s is READY!!"%name) 
         time.sleep(3)
 
-    @unittest.skip('Not need now')
+    #@unittest.skip('Not need now')
     def test_INVENTORY_GOLDEN_EYE(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'GOLDEN_EYE RITE INSIGHT '
+        print(name)
 
         #eL BOT 1 LLEGA HASTA PRODUCT FILER Y DESPUES EL BOTON DE EXCEL 
         self.PageInitial.step_1(self.email,self.pswd)
@@ -281,12 +292,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         # !!! IMPORTANTE !!! ENCONTRAR EL ULTIMO ARCHIVO EN LA CARPETA DE DESCARGAS Y CAMBIARLE EL NOMBRE POR EL DESEADO
         #Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin")
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
         
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -299,11 +310,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         time.sleep(3)
 
   
-    @unittest.skip('Not need now')
+    #@unittest.skip('Not need now')
     def test_INVENTORY_VIRMAX(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'VIRMAX RITE INSIGHT '
+        print(name)
 
         #eL BOT 1 LLEGA HASTA PRODUCT FILER Y DESPUES EL BOTON DE EXCEL 
         self.PageInitial.step_1(self.email,self.pswd)
@@ -331,12 +343,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         # !!! IMPORTANTE !!! ENCONTRAR EL ULTIMO ARCHIVO EN LA CARPETA DE DESCARGAS Y CAMBIARLE EL NOMBRE POR EL DESEADO
         #Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin")
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
         
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -353,6 +365,7 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'EVOLVE RITE INSIGHT '
+        print(name)
 
         #eL BOT 1 LLEGA HASTA PRODUCT FILER Y DESPUES EL BOTON DE EXCEL 
         self.PageInitial.step_1(self.email,self.pswd)
@@ -380,12 +393,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         # !!! IMPORTANTE !!! ENCONTRAR EL ULTIMO ARCHIVO EN LA CARPETA DE DESCARGAS Y CAMBIARLE EL NOMBRE POR EL DESEADO
         #Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin")
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
         
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -399,11 +412,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         
         
     
-    @unittest.skip('Not need now')
+    #@unittest.skip('Not need now')
     def test_INVENTORY_SOYLENT(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'SOYLENT RITE INSIGHT '
+        print(name)
 
         #eL BOT 1 LLEGA HASTA PRODUCT FILER Y DESPUES EL BOTON DE EXCEL 
         self.PageInitial.step_1(self.email,self.pswd)
@@ -431,12 +445,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         # !!! IMPORTANTE !!! ENCONTRAR EL ULTIMO ARCHIVO EN LA CARPETA DE DESCARGAS Y CAMBIARLE EL NOMBRE POR EL DESEADO
         #Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin")
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
         
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -455,6 +469,7 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'SBIC YTD 27DEC2020 TO LAST SATURDAY '
+        print(name)
                         
         self.PageInitial.step_1(self.email,self.pswd)
         self.PageProcess.POS_tab()
@@ -486,8 +501,8 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         previous_file_path = self.ytd_path
         #Current_Date = datetime.now().strftime("%d-%b-%Y %HHr %MMin") 
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
         
         try: 
             previous_file = max([previous_file_path + "\\" + f for f in os.listdir(previous_file_path)],key=os.path.getctime) #Ultimo archivo cargado en la ruta del retailer 
@@ -506,15 +521,15 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
             limite = n_rows_prev/3
             
             if(n_rows_current>n_rows_prev+limite or n_rows_current<n_rows_prev-limite):              
-                new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+                new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
                 shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))
             else:
-                new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+                new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
                 shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))
         except:
             Initial_path = self.dir_download
             filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-            new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+            new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
             shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -525,11 +540,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         time.sleep(3)  
         
 
-    @unittest.skip('Not need now')   
+    #@unittest.skip('Not need now')   
     def test_SBIC_WEEKLY(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'SBIC 1 WEEK '
+        print(name)
         
         self.PageInitial.step_1(self.email,self.pswd)
         self.PageProcess.POS_tab()
@@ -558,13 +574,13 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
                 continue
             
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
 
         #Encontrar el ultimo archvio descargado y cambiarle el nombre 
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -575,11 +591,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         time.sleep(3)   
         
         
-    @unittest.skip('Not need now')   
+    #@unittest.skip('Not need now')   
     def test_SBIC_52_WEEKS(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'SBIC 52 WEEKS '
+        print(name)
                  
         self.PageInitial.step_1(self.email,self.pswd)
         self.PageProcess.POS_tab()
@@ -608,13 +625,13 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
                 continue
             
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
 
         #Encontrar el ultimo archvio descargado y cambiarle el nombre 
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -624,12 +641,13 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         print("%s is READY!!"%name) 
         time.sleep(3)    
         
-    @unittest.skip('Not need now')   
+    #@unittest.skip('Not need now')   
     def test_SBIC_26_WEEKS(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'SBIC 26 WEEKS '
-                 
+        print(name)
+                
         self.PageInitial.step_1(self.email,self.pswd)
         self.PageProcess.POS_tab()
         self.PageProcess.select_report(3)
@@ -657,13 +675,13 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
                 continue
             
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
 
         #Encontrar el ultimo archvio descargado y cambiarle el nombre 
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -673,11 +691,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         print("%s is READY!!"%name) 
         time.sleep(3)         
         
-    @unittest.skip('Not need now')   
+    #@unittest.skip('Not need now')   
     def test_SBIC_13_WEEKS(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'SBIC 13 WEEKS '
+        print(name)
                 
         self.PageInitial.step_1(self.email,self.pswd)
         self.PageProcess.POS_tab()
@@ -706,13 +725,13 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
                 continue
             
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
 
         #Encontrar el ultimo archvio descargado y cambiarle el nombre 
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -722,11 +741,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         print("%s is READY!!"%name) 
         time.sleep(3)   
     
-    @unittest.skip('Not need now')   
+    #@unittest.skip('Not need now')   
     def test_SBIC_4_WEEKS(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'SBIC 4 WEEKS '
+        print(name)
                 
         self.PageInitial.step_1(self.email,self.pswd)
         self.PageProcess.POS_tab()
@@ -755,13 +775,13 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
                 continue
             
         #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
 
         #Encontrar el ultimo archvio descargado y cambiarle el nombre 
         Initial_path = self.dir_download
         filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-        new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+        new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
         shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA
@@ -771,11 +791,12 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         print("%s is READY!!"%name) 
         time.sleep(3)   
     
-    @unittest.skip('Not need now')   
+    #@unittest.skip('Not need now')   
     def test_ITEM_MASTER_LISTING(self):
         # Obtener la descargas antes de los test
         before = os.listdir(self.dir_download) 
         name = 'ITEM MASTER LISTING 52 WEEKS '
+        print(name)
                  
         self.PageInitial.step_1(self.email,self.pswd)
         self.PageProcess.POS_tab()
@@ -801,8 +822,8 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
         # !!! IMPORTANTE !!! Aqui Checar el ultimo archivo cargado de ese retailer y vemos los renglones que tiene damos un rango de +- 100 o 50 FALTAAAAAA RUTA DEL RETAILER EN EL QUE ESTAMOS Y REVISAR ULTIMO ARCHIVO Y CONTAR LOS ROWS
         previous_file_path = self.item_master_listing_path
                 #Week number 
-        t1 = datetime.now()
-        week_number = t1.strftime("%U")
+        #t1 = datetime.now()
+        #week_number = t1.strftime("%U")
         
         try:
             previous_file = max([previous_file_path + "\\" + f for f in os.listdir(previous_file_path)],key=os.path.getctime) #Ultimo archivo cargado en la ruta del retailer 
@@ -821,15 +842,15 @@ class Download_RITE_INSIGHT_DATA(unittest.TestCase):
             limite = n_rows_prev/3
 
             if(n_rows_current>n_rows_prev+limite or n_rows_current<n_rows_prev-limite):              
-                new_name = 'ERROR PLEASE CHECK IF THIS FILE IS OK ' + 'week ' + str(week_number) + '.xlsx'
+                new_name = 'ERROR PLEASE CHECK IF THIS FILE IS OK ' + 'week ' + str(self.week_number) + '.xlsx'
                 shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))
             else:
-                new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+                new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
                 shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))
         except:
             Initial_path = self.dir_download
             filename = max([Initial_path + "\\" + f for f in os.listdir(Initial_path)],key=os.path.getctime)
-            new_name = '%s'%name + 'week ' + str(week_number) + '.xlsx'
+            new_name = '%s'%name + 'week ' + str(self.week_number) + '.xlsx'
             shutil.move(filename,os.path.join(Initial_path,r'%s' %new_name))            
             
         #MOVER EL ARCHIVO A LA UBICACION DESEADA

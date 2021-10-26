@@ -149,16 +149,18 @@ class process_page():
             print ("Loading -Checks 48 and 49- took too much time!")
 
 
-
+#!!!ESTE MODIFICAR SI QUEREMOS CORRER PARA LA SEMANA PASADA!!!
     def set_dates(self, numbot, *args):
         try:
             if numbot == 1:
                 
-                #Select dates OF INVENTORY RATE OF SALES REPORT
+                #Select dates OF INVENTORY RATE OF SALES REPORT (LAST WEEK)
                 time.sleep(15)
-                select_first = Select(self.driver.find_element(*self.dates_filter_button)) 
+                select_first = Select(self.driver.find_element(*self.dates_filter_button))
+                #Aqui seleccionamos la ultima semana, si queremos modificar a la pasada poner un 1
                 select_first.select_by_index(0)
-
+                #select_first.select_by_index(1)
+                
             elif numbot == 2:
 
                 #--Set Dates YTD
@@ -170,11 +172,12 @@ class process_page():
                 Start_date.send_keys(start_date)
                 
                 #End date
-                #Encontrar el ultimo sabado
+                #Encontrar el ultimo sabado #Si queremos modificar a la semana pasada ponerlo manual como el comentario de abajo sat_format
                 today = date.today()
                 idx = (today.weekday() + 1) % 7
                 sat = today - datetime.timedelta(7+idx-6)  
                 sat_format = sat.strftime("%m/%d/%Y")
+                #sat_format = '09/25/2021' #ULTIMO SABADO DE LA SEMANA QUE QUEREMOS BAJAR
                 end_date = sat_format # Ultimo sabado disponible
                 End_date = WebDriverWait(self.driver,60).until(EC.visibility_of_element_located(self.end_date))
                 End_date.clear()
@@ -185,12 +188,13 @@ class process_page():
                 
                 #--Set Dates WEEKLY 
 
-                #End date
+                #End date #Si se quieren modificar fechas ponerlo manual sat_format y sun_format
                 #Encontrar el ultimo sabado
                 today = date.today()
                 idx = (today.weekday() + 1) % 7
                 sat = today - datetime.timedelta(7+idx-6)  
                 sat_format = sat.strftime("%m/%d/%Y")
+                #sat_format = '09/25/2021' #Modificar en caso de cambiar fechas
                 end_date = sat_format # Ultimo sabado disponible
                 End_date = WebDriverWait(self.driver,60).until(EC.visibility_of_element_located(self.end_date))
                 End_date.clear()
@@ -200,6 +204,7 @@ class process_page():
                 #Encontrar el ultimo domingo despues del ultimo sabado
                 sun = sat - datetime.timedelta(days=6)
                 sun_format = sun.strftime("%m/%d/%Y") #Previous Sunday before that Saturday 
+                #sun_format = '09/19/2021' #Modificar en caso de cambiar fechas
                 start_date = sun_format # 12/27/2020 
                 Start_date = WebDriverWait(self.driver,60).until(EC.visibility_of_element_located(self.start_date))
                 Start_date.clear()
@@ -208,7 +213,7 @@ class process_page():
                 
             elif numbot == 4:
                 
-                #--Set Dates for period Reports
+                #--Set Dates for period Reports (4, 13, 26, 52), si este reporte se quiere para la semana pasada se debe sacar de manera manual
                 period = args[0]
                                 
                 #Encontrar el dropdown
@@ -468,22 +473,6 @@ class process_page():
             #else:
             #    pass
             
-            #if self.driver.find_element(*self.promo_sales_checkbox3).is_selected()==False:
-            #    self.driver.find_element(*self.promo_sales_checkbox3).click()
-            #else:
-            #    pass
-            
-            #if self.driver.find_element(*self.promo_sales_checkbox4).is_selected()==False:
-            #    self.driver.find_element(*self.promo_sales_checkbox4).click()
-            #else:
-            #    pass
-            
-            #if self.driver.find_element(*self.promo_sales_checkbox5).is_selected()==False:
-            #    self.driver.find_element(*self.promo_sales_checkbox5).click()
-            #else:
-            #    pass
-            
-            
             #Units
             if self.driver.find_element(*self.promo_units_checkbox).is_selected()==False:
                 self.driver.find_element(*self.promo_units_checkbox).click()
@@ -492,32 +481,6 @@ class process_page():
             
             WebDriverWait(self.driver,25).until(EC.visibility_of_element_located(self.promo_units_checkbox2))
             
-            #if self.driver.find_element(*self.promo_units_checkbox2).is_selected()==False:
-            #    self.driver.find_element(*self.promo_units_checkbox2).click()
-            #else:
-            #    pass
- 
-            #if self.driver.find_element(*self.promo_units_checkbox3).is_selected()==False:
-            #    self.driver.find_element(*self.promo_units_checkbox3).click()
-            #else:
-            #    pass
-                        
-            #if self.driver.find_element(*self.promo_units_checkbox3).is_selected()==False:
-            #    self.driver.find_element(*self.promo_units_checkbox3).click()
-            #else:
-            #    pass
-                        
-            #if self.driver.find_element(*self.promo_units_checkbox4).is_selected()==False:
-            #    self.driver.find_element(*self.promo_units_checkbox4).click()
-            #else:
-            #    pass
-            
-            #if self.driver.find_element(*self.promo_units_checkbox5).is_selected()==False:
-            #    self.driver.find_element(*self.promo_units_checkbox5).click()
-            #else:
-            #    pass
-            
-            
             #AVG PRICE
             if self.driver.find_element(*self.promo_AVGRETAILPRICE_checkbox).is_selected()==False:
                 self.driver.find_element(*self.promo_AVGRETAILPRICE_checkbox).click()
@@ -525,28 +488,8 @@ class process_page():
                 pass
             
             WebDriverWait(self.driver,25).until(EC.visibility_of_element_located(self.promo_AVGRETAILPRICE_checkbox2))
-            
-            #if self.driver.find_element(*self.promo_AVGRETAILPRICE_checkbox2).is_selected()==False:
-            #    self.driver.find_element(*self.promo_AVGRETAILPRICE_checkbox2).click()
-            #else:
-            #    pass            
-            
-            #if self.driver.find_element(*self.promo_AVGRETAILPRICE_checkbox3).is_selected()==False:
-            #   self.driver.find_element(*self.promo_AVGRETAILPRICE_checkbox3).click()
-            #else:
-            #    pass            
-            
-            #if self.driver.find_element(*self.promo_AVGRETAILPRICE_checkbox4).is_selected()==False:
-            #   self.driver.find_element(*self.promo_AVGRETAILPRICE_checkbox4).click()
-            #else:
-            #   pass            
-     
-            #if self.driver.find_element(*self.promo_AVGRETAILPRICE_checkbox5).is_selected()==False:
-            #    self.driver.find_element(*self.promo_AVGRETAILPRICE_checkbox5).click()
-            #else:
-            #    pass       
         
-                    
+        
             #Click en seleccionar todo de las 4 columnas 
             self.driver.find_element(*self.promo_allty).click()
             self.driver.find_element(*self.promo_allly).click()
